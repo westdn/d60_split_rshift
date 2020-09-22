@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,           KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
 		KC_LCTL,          KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,
 		KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,          KC_RSFT, MO(_USFL),
-		KC_LCTL,    KC_LGUI,      KC_LALT,      KC_SPC,  LT(_USFL, KC_SPC),      KC_SPC,           KC_RALT, KC_RGUI,          KC_BTN2,   KC_RCTL
+		KC_LCTL,    KC_LGUI,      KC_LALT,      KC_SPC,        KC_SPC,      KC_SPC,           KC_RALT, KC_RGUI,          KC_BTN2,   KC_RCTL
 		),
 
 	
@@ -60,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,          _______, _______, _______, _______, _______, _______, _______, KC_PSCR, G(A(KC_PSCR)), XXXXXXX, KC_UP, XXXXXXX, _______,
 		MO(_ADJUST),          _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_PGUP,  KC_LEFT, KC_RGHT, _______,
 		_______,          _______, _______, _______,  _______, _______,  _______, _______, KC_END,  KC_PGDN,  KC_DOWN,          _______, _______,
-		_______, _______,          _______,      KC_SPC,  LT(_USFL, KC_SPC),      KC_SPC,         _______, _______,          _______, _______
+		_______, _______,          _______,      KC_SPC,          KC_SPC,      KC_SPC,         _______, _______,          _______, _______
 		),
 
 	// [_USFLCTRL] = LAYOUT_60_ansi_split_space_rshift(
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TAB,           JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,    JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    JP_LBRC, JP_RBRC, JP_BSLS,
 		KC_LCTL,          JP_A,    JP_S,    JP_D,    JP_F,    JP_G,    JP_H,    JP_J,    JP_K,    JP_L,    JP_SCLN, JP_QUOT, KC_ENT,
 		MO(_JPSFT),          JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,    JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH,   KC_RSFT,  MO(_JPFL),
-		KC_LCTL, KC_LGUI,     LALT_T(JP_MHEN),    KC_SPC,  LT(_JPFL, KC_SPC),       KC_SPC,    RALT_T(JP_HENK), KC_RGUI,   KC_BTN2,   KC_RCTL
+		KC_LCTL, KC_LGUI,     LALT_T(JP_MHEN),    KC_SPC,          KC_SPC,       KC_SPC,    RALT_T(JP_HENK), KC_RGUI,   KC_BTN2,   KC_RCTL
 		),
 
 	/* Shifted symbols
@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		S(KC_TAB), S(JP_Q), S(JP_W), S(JP_E), S(JP_R), S(JP_T), S(JP_Y), S(JP_U), S(JP_I), S(JP_O), S(JP_P), JP_LCBR, JP_RCBR,   JP_PIPE,
 		S(KC_LCTL),   S(JP_A), S(JP_S), S(JP_D), S(JP_F), S(JP_G), S(JP_H), S(JP_J), S(JP_K), S(JP_L),    JP_COLN, JP_DQUO,           S(KC_ENT),
 		_______,    S(JP_Z), S(JP_X), S(JP_C), S(JP_V), S(JP_B), S(JP_N), S(JP_M),    JP_LABK,     JP_RABK,   JP_QUES, _______, LM(_JPFL, MOD_LSFT),
-		S(KC_LCTL),   KC_LGUI,    _______,       KC_SPC,       LT(_JPFL, KC_SPC),        KC_SPC,      _______,    _______,   _______,    S(KC_RCTL)
+		S(KC_LCTL),   KC_LGUI,    _______,       KC_SPC,            KC_SPC,        KC_SPC,      _______,    _______,   _______,    S(KC_RCTL)
 		),
 
 	[_JPFL] = LAYOUT_60_ansi_split_space_rshift(
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		_______,          KC_BTN1, KC_MS_U, KC_BTN2, KC_WH_U, _______, _______, _______, KC_PSCR, G(A(KC_PSCR)), XXXXXXX, KC_UP, XXXXXXX, JP_ZKHK,
 		MO(_ADJUST),          KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, _______, _______, _______, KC_HOME, KC_PGUP,  KC_LEFT, KC_RGHT, _______,
 		KC_LSFT,          _______, _______, _______,  _______, _______,  _______, _______, KC_END,  KC_PGDN,  KC_DOWN,          _______, _______,
-		_______, _______,          _______,      KC_SPC,    LT(_JPFL, KC_SPC),        KC_SPC,         _______, _______,          _______, _______
+		_______, _______,          _______,      KC_SPC,           KC_SPC,        KC_SPC,         _______, _______,          _______, _______
 		),
 
 	[_ADJUST] = LAYOUT_60_ansi_split_space_rshift(
