@@ -11,27 +11,11 @@ enum keyboard_layers {
   _ADJUST,		// adjust Layer
 };
 
-enum custom_keycodes {
-  JIS = SAFE_RANGE,
-  US,
-  JU_2,
-  JU_6,
-  JU_7,
-  JU_8,
-  JU_9,
-  JU_0,
-  JU_MINS,
-  JU_EQL,
-  JU_LBRC,
-  JU_RBRC,
-  JU_BSLS,
-  JU_SCLN,
-  JU_QUOT,
-  JU_GESC,
-  JU_CAPS,
-  JTU_SAFE_RANGE
+// 特殊な動作のキーコード
+enum planck_keycodes {
+  JIS = SAFE_RANGE, // デフォルトレイヤーをJIS配列用に切替
+  US,               // デフォルトレイヤーをUS配列用に切替
 };
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -101,19 +85,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	* `-----------------------------------------------------------------------------------------' 
 	*/
 	
-	// [_JPBL] = LAYOUT_60_ansi_split_space_rshift(
-	// 	KC_ESC, JP_1,    JP_2,    JP_3,    JP_4,    JP_5,    JP_6,    JP_7,    JP_8,    JP_9,    JP_0,    JP_MINS, JP_EQL,           KC_BSPC,
-	// 	KC_TAB,           JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,    JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    JP_LBRC, JP_RBRC, JP_BSLS,
-	// 	KC_LCTL,          JP_A,    JP_S,    JP_D,    JP_F,    JP_G,    JP_H,    JP_J,    JP_K,    JP_L,    JP_SCLN, JP_QUOT, KC_ENT,
-	// 	LM(_JPSFT, MOD_LSFT),   JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,    JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH,   KC_RSFT,  MO(_JPFL),
-	// 	KC_LCTL, KC_LGUI,     LALT_T(JP_MHEN),    KC_SPC,          KC_SPC,       KC_SPC,    RALT_T(JP_HENK), KC_RGUI,   KC_BTN2,   KC_RCTL
-	// 	),
-
-  [_JPBL] = LAYOUT_60_ansi_split_space_rshift(
-		JU_GESC, JP_1,    JU_2,    JP_3,    JP_4,    JP_5,    JU_6,    JU_7,    JU_8,    JU_9,    JU_0,    JU_MINS, JU_EQL,           KC_BSPC,
-		KC_TAB,           JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,    JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    JU_LBRC, JU_RBRC, JU_BSLS,
-		KC_LCTL,          JP_A,    JP_S,    JP_D,    JP_F,    JP_G,    JP_H,    JP_J,    JP_K,    JP_L,    JU_SCLN, JU_QUOT, KC_ENT,
-		KC_LSFT,   JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,    JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH,   KC_RSFT,  MO(_JPFL),
+	[_JPBL] = LAYOUT_60_ansi_split_space_rshift(
+		KC_ESC, JP_1,    JP_2,    JP_3,    JP_4,    JP_5,    JP_6,    JP_7,    JP_8,    JP_9,    JP_0,    JP_MINS, JP_EQL,           KC_BSPC,
+		KC_TAB,           JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,    JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    JP_LBRC, JP_RBRC, JP_BSLS,
+		KC_LCTL,          JP_A,    JP_S,    JP_D,    JP_F,    JP_G,    JP_H,    JP_J,    JP_K,    JP_L,    JP_SCLN, JP_QUOT, KC_ENT,
+		MO(_JPSFT),          JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,    JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH,   KC_RSFT,  MO(_JPFL),
 		KC_LCTL, KC_LGUI,     LALT_T(JP_MHEN),    KC_SPC,          KC_SPC,       KC_SPC,    RALT_T(JP_HENK), KC_RGUI,   KC_BTN2,   KC_RCTL
 		),
 
@@ -173,31 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // 		KC_LCTL, KC_LGUI,          KC_LALT,      KC_SPC,        KC_SPC,          KC_SPC,          KC_RALT, KC_RGUI,          MO(_FL),   KC_RCTL
 // 		),
 
-static bool lshift = false;
-static bool rshift = false;
 
-// void keypair_us_to_jis(uint16_t keycode, uint16_t s_keycode, keyrecord_t *record) {
-//   if (record->event.pressed) {
-//     lshift = get_mods() & MOD_BIT(KC_LSFT);
-//     rshift = get_mods() & MOD_BIT(KC_RSFT);
-//     if (lshift || rshift) {
-//       if (lshift) unregister_code(KC_LSFT);
-//       if (rshift) unregister_code(KC_RSFT);
-//       register_code(s_keycode);
-//     } else {
-//       register_code(keycode);
-//     }
-//   }
-//   else {
-//     if (lshift || rshift) {
-//       unregister_code(s_keycode);
-//       if (lshift) register_code(KC_LSFT);
-//       if (rshift) register_code(KC_RSFT);
-//     } else {
-//       unregister_code(keycode);
-//     }
-//   }
-// }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -214,341 +166,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //     PLAY_SONG(tone_qwerty);
     //   }
     //   return true; // Let QMK send the enter press/release events
-    case JIS:
-        if (record->event.pressed) {
-          set_single_persistent_default_layer(_JPBL);
-        }
-        return false;
-        break;
-
-    case US:
-        if (record->event.pressed) {
-          set_single_persistent_default_layer(_USBL);
-        }
-        return false;
-        break;
-
-    case JU_2:
-      // keypair_us_to_jis(KC_2, JP_AT, record);
-      // return false;
+	case JIS:
       if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          if (lshift) unregister_code(KC_LSFT);
-          if (rshift) unregister_code(KC_RSFT);
-          register_code(JP_AT);
-        } else {
-          register_code(KC_2);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_AT);
-          if (lshift) register_code(KC_LSFT);
-          if (rshift) register_code(KC_RSFT);
-        } else {
-          unregister_code(KC_2);
-        }
+        set_single_persistent_default_layer(_JPBL);
       }
       return false;
-    
-    case JU_6:
-      // keypair_us_to_jis(KC_6, JP_CIRC, record);
-      // return false;
+      break;
+
+	case US:
       if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          if (lshift) unregister_code(KC_LSFT);
-          if (rshift) unregister_code(KC_RSFT);
-          register_code(JP_CIRC);
-        } else {
-          register_code(KC_6);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_CIRC);
-          if (lshift) register_code(KC_LSFT);
-          if (rshift) register_code(KC_RSFT);
-        } else {
-          unregister_code(KC_6);
-        }
+        set_single_persistent_default_layer(_USBL);
       }
       return false;
-
-    case JU_7:
-      // keypair_us_to_jis(KC_7, JP_AMPR, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(KC_6);
-        } else {
-          register_code(KC_7);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(KC_6);
-        } else {
-          unregister_code(KC_7);
-        }
-      }
-      return false;
-
-    case JU_8:
-      // keypair_us_to_jis(KC_8, JP_ASTR, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_SCLN);
-        } else {
-          register_code(KC_8);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_SCLN);
-        } else {
-          unregister_code(KC_8);
-        }
-      }
-      return false;
-
-    case JU_9:
-      // keypair_us_to_jis(KC_9, JP_LPRN, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(KC_8);
-        } else {
-          register_code(KC_9);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(KC_8);
-        } else {
-          unregister_code(KC_9);
-        }
-      }
-      return false;
-
-    case JU_0:
-      // keypair_us_to_jis(KC_0, JP_RPRN, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(KC_9);
-        } else {
-          register_code(KC_0);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(KC_9);
-        } else {
-          unregister_code(KC_0);
-        }
-      }
-      return false;
-
-    case JU_MINS:
-      // keypair_us_to_jis(JP_MINS, JP_UNDS, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_BSLS);
-        } else {
-          register_code(JP_MINS);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_BSLS);
-        } else {
-          unregister_code(JP_MINS);
-        }
-      }
-      return false;
-
-    case JU_EQL:
-      // keypair_us_to_jis(JP_EQL, JP_PLUS, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_SCLN);
-        } else {
-          register_code(KC_LSFT);
-          register_code(JP_MINS);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_SCLN);
-        } else {
-          unregister_code(JP_MINS);
-          unregister_code(KC_LSFT);
-        }
-      }
-      return false;
-
-
-    case JU_LBRC:
-      // keypair_us_to_jis(JP_LBRC, JP_LCBR, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_LBRC);
-        } else {
-          register_code(JP_LBRC);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_LBRC);
-        } else {
-          unregister_code(JP_LBRC);
-        }
-      }
-      return false;
-
-
-    case JU_RBRC:
-      // keypair_us_to_jis(JP_RBRC, JP_RCBR, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_RBRC);
-        } else {
-          register_code(JP_RBRC);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_RBRC);
-        } else {
-          unregister_code(JP_RBRC);
-        }
-      }
-      return false;
-
-
-    case JU_BSLS:
-      // keypair_us_to_jis(JP_BSLS, JP_PIPE, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_YEN);
-        } else {
-          register_code(JP_BSLS);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_YEN);
-        } else {
-          unregister_code(JP_BSLS);
-        }
-      }
-      return false;
-
-
-    case JU_SCLN:
-      // keypair_us_to_jis(JP_SCLN, JP_COLN, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          if (lshift) unregister_code(KC_LSFT);
-          if (rshift) unregister_code(KC_RSFT);
-          register_code(JP_COLN);
-        } else {
-          register_code(JP_SCLN);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_COLN);
-          if (lshift) register_code(KC_LSFT);
-          if (rshift) register_code(KC_RSFT);
-        } else {
-          unregister_code(JP_SCLN);
-        }
-      }
-      return false;
-
-
-    case JU_QUOT:
-      // keypair_us_to_jis(JP_QUOT, JP_DQUO, record);
-      // return false;
-
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          if (lshift) register_code(KC_LSFT);
-          if (rshift) register_code(KC_RSFT);
-          register_code(KC_2);
-        } else {
-          register_code(KC_LSFT);
-          register_code(KC_7);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(KC_2);
-          if (lshift) register_code(KC_LSFT);
-          if (rshift) register_code(KC_RSFT);
-        } else {
-          unregister_code(KC_7);
-          unregister_code(KC_LSFT);
-        }
-      }
-      return false;
-
-    case JU_GESC:
-      // keypair_us_to_jis(KC_ESC, JP_TILD, record);
-      // return false;
-      if (record->event.pressed) {
-        lshift = get_mods() & MOD_BIT(KC_LSFT);
-        rshift = get_mods() & MOD_BIT(KC_RSFT);
-        if (lshift || rshift) {
-          register_code(JP_CIRC);
-        } else {
-          register_code(KC_ESC);
-        }
-      }
-      else {
-        if (lshift || rshift) {
-          unregister_code(JP_CIRC);
-        } else {
-          unregister_code(KC_ESC);
-        }
-      }
-      return false;
-
-  
+      break;
 
     default:
       return true; // Process all other keycodes normally
