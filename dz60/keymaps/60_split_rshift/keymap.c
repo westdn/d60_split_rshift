@@ -28,6 +28,7 @@ enum custom_keycodes {
   JU_QUOT,
   JU_GESC,
   JU_CAPS,
+  JU_BSPC,
   JTU_SAFE_RANGE
 };
 
@@ -95,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	
 
   [_JPBL] = LAYOUT_60_ansi_split_space_rshift(
-		JU_GESC, JP_1,    JU_2,    JP_3,    JP_4,    JP_5,    JU_6,    JU_7,    JU_8,    JU_9,    JU_0,    JU_MINS, JU_EQL,           KC_BSPC,
+		JU_GESC, JP_1,    JU_2,    JP_3,    JP_4,    JP_5,    JU_6,    JU_7,    JU_8,    JU_9,    JU_0,    JU_MINS, JU_EQL,           JU_BSPC,
 		KC_TAB,           JP_Q,    JP_W,    JP_E,    JP_R,    JP_T,    JP_Y,    JP_U,    JP_I,    JP_O,    JP_P,    JU_LBRC, JU_RBRC, JU_BSLS,
 		KC_LCTL,          JP_A,    JP_S,    JP_D,    JP_F,    JP_G,    JP_H,    JP_J,    JP_K,    JP_L,    JU_SCLN, JU_QUOT, KC_ENT,
 		KC_LSFT,   JP_Z,    JP_X,    JP_C,    JP_V,    JP_B,    JP_N,    JP_M,    JP_COMM, JP_DOT,  JP_SLSH,   KC_RSFT,  MO(_JPFL),
@@ -255,14 +256,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         lshift = get_mods() & MOD_BIT(KC_LSFT);
         rshift = get_mods() & MOD_BIT(KC_RSFT);
         if (lshift || rshift) {
-          register_code(JP_SCLN);
+          register_code(JP_COLN);
         } else {
           register_code(KC_8);
         }
       }
       else {
         if (lshift || rshift) {
-          unregister_code(JP_SCLN);
+          unregister_code(JP_COLN);
         } else {
           unregister_code(KC_8);
         }
@@ -493,6 +494,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code(JP_CIRC);
         } else {
           unregister_code(KC_ESC);
+        }
+      }
+      return false;
+
+      case JU_BSPC:
+      // keypair_us_to_jis(KC_ESC, JP_TILD, record);
+      // return false;
+      if (record->event.pressed) {
+        lshift = get_mods() & MOD_BIT(KC_LSFT);
+        rshift = get_mods() & MOD_BIT(KC_RSFT);
+        if (lshift || rshift) {
+          if (lshift) unregister_code(KC_LSFT);
+          if (rshift) unregister_code(KC_RSFT);
+          register_code(KC_DEL);
+        } else {
+          register_code(KC_BSPC);
+        }
+      }
+      else {
+        if (lshift || rshift) {
+          unregister_code(KC_DEL);
+          if (lshift) register_code(KC_LSFT);
+          if (rshift) register_code(KC_RSFT);
+        } else {
+          unregister_code(KC_BSPC);
         }
       }
       return false;
